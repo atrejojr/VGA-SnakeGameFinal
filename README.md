@@ -5,11 +5,15 @@
 https://youtu.be/NK-NUK9Y8_Q 
 
 ### <ins>Project Overview:</ins>  
-This is a single player video game based on the game “Snake” that is designed to be compatible with an FPGA board and a VGA display and a computer that can run Vivado.
+This is a single player video game based on the game “Snake” that is designed to be played with an FPGA board (Nexys A7) and a VGA display through Vivado.
 
 ### <ins>How to Run:</ins> 
 
-To run our game, simply download each of the attached sources in the sources and the constraints file onto a computer that can run Vivado. You must then open the file and import each of the files as a source or constraint respectively. Connect a VGA display to display the game. You must connect an FPGA board to use as your controller for our game. To start the game, simply upload the code to the FPGA board and hit any of the buttons to choose your direction. Once the snake begins to move, use the arrow buttons in the direction the snake moves in. As you pick up apples, which are discerned by the red or brown colored blocks that reappear once you run into them, the score counter on the FPGA increases. Running into yourself or the walls will cause a red game over screen to display. You must then hit the reset switch to restart the game and set the score back to 0! Once you hit 18 points, you have reached the highest length, but you can keep playing and the score will continue to update until you reach a score of 69. Use the difficulty switch furthest to the left to change between snake mode and caterpillar mode. Not only does this change the palette of the game, but it also increases the speed and therefore difficulty. 
+To run our game, simply download the zip file with all .v source files and the .xdc constraints file. Then, open up Vivado and add all downloaded files into a project. Ensure to import the .v files as a source and the .xdc as a constraint. Connect an FPGA board to controll the game. Additionally, make sure to connect a VGA cable to both the FPGA and a monitor. Once you load up the game, you can start the game by clicking any of the directinal buttons in the FPGA. Eating an apple/bug increases the caterpillar's/snake's length. The left-most switch doubles as a color palatte switch and a game mode switch. When the switch is down, the game plays a snake (hard) mode. When you flip the switch, you enter caterpillar (easy) mode. The current score is displayed on a 7-segment display on the FPGA and will currently only display up to 69 points. If you collide with your body or a border, the screen will flash red and you will immediately restart with the score counter reseting to 0. If you want to stop the snake from moving, click the reset button. Currently, if you press the reset button while playing the game, the snake's length will be saved but the position will be reset to its initial state. If you wish to fully reset the game, simply collide with a border or your body and the press the reset button.
+
+**Note:** 
+- Nothing happens when you surpass 69 points, we just hard-coded the display
+- The snake's length will reach it's maximum when you eat 18 apples or more... again, hard-code
 
 
 ### <ins>Bugs:</ins>
@@ -41,10 +45,10 @@ Snake - Top-most module connecting all smaller modules together wirking in conju
 
   vga_display_2 - responsible for the Hsync and Vsync outputs of the VGA display and making sure that everything is
   displayed in the correct area of the screen in the playing area we desire
+
 ```
  
-
-We did not need to use any test benches to test our game. What was more beneficial to us was testing different states and outputs such as endgame and score by creating LED outputs on the FPGA board to temporarily see if these features were working as intended.  
+We did not need to use any test benches to test our game. Instead, we pushed and tested our code throught the FPGA and real-time inputs as we changed the corresponding outputs.  
 
 ### <ins>Project Inspiration:</ins>
 
