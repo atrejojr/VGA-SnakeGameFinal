@@ -34,18 +34,25 @@ In a game with as many modules and components as this one, there are bound to be
 ```
 Snake - Top-most module connecting all smaller modules together wirking in conjunction with our constraints file
 
-  TopModule - controls the BCD display counter for the score on the FPGA board. This module consists of anodes which
-  controls the anodes of the display, a clock divider, a counter and a counter controller which updates the score on
-  the display
+  clk_divider - general clock divider for the game
 
-  vga_display - responsible for the output on the VGA that corresponds to the snake and the features of the game we
-  can see. It consists of the modules that   control the snake, apples, and game over conditions. The movement of the
-  snake is all based around a clock divider which is adjusted with the difficulty switch to make the snake move slower
-  or faster depending on the difficulty the player wants
+  button_inputs - assigns numbers to the buttons to later help with the movement case statements
+      debouncer - helps eliminate unnecessary noise from button inputs
 
-  vga_display_2 - responsible for the Hsync and Vsync outputs of the VGA display and making sure that everything is
-  displayed in the correct area of the screen in the playing area we desire
+  vga_display - outputs to the VGA and helps create the snake and the features of the game including game logic
+  and game modes as well as the display seen by the user
+      snake_clock - snake's clock that can change with the palatte switch 
+      apple_gen - logic that controls the generation of the apples in the game
+      end_game - creates the conditions to lose the game 
 
+  vga_display_2 - responsible for the Hsync and Vsync outputs of the VGA display to ensure we have an active VGA display
+
+  topmodule - controls the 7-segment display counter for the score on the FPGA board
+      refclk - creates a refresh clock for the display
+      refcnt - counter for the refresh clock to simplify the display
+      anodes - controls all 8 digits on the BCD display on the fpga board
+      countercontrol - creates " SCOrE-XX" where XX is the score of the current game
+      counter - encoder for the display
 ```
  
 We did not need to use any test benches to test our game. Instead, we pushed and tested our code throught the FPGA and real-time inputs as we changed the corresponding outputs.  
