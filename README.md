@@ -22,13 +22,13 @@ In a game with as many modules and components as this one, there are bound to be
 
 - If you hit the reset button in snake mode, the screen's Hsync and Vsync are disrupted on the right side and offset by about 10 and 5 pixels respectively. If you switch back to caterpillar mode and hit reset, it corrects the issue. 
 
-- In order to stop the snake’s movement after a game over, after crashing into a wall  then you must press the reset switch. In the current iteration, it is not possible to reset the score and therefore length of your snake with just “reset” switch
+- In order to stop the snake’s movement after a game over, you must click the reset button. However, this will not reset the score counter and since the snake's size depends on this counter, you should see the snake keep its size. To fix this, cause a self/border collision and THEN click reset. 
 
-- A never ending death sequence occurs if you die while moving to the left. This is because when the snake dies in our game, it doesn’t stop moving until you hit the reset button. To fix this, either hit the reset button or hit a direction other than left.
+- A never ending death sequence occurs if you die while moving to the left since we save the last movement input. Since our snake's body is to the left of the head, you will constantly be causign a body collision leading to an endgame state every other clock cycle. To fix this, either hit the reset button or hit any other direction other than left.
 
-- Very very rarely the apple can possibly generate within the body of the snake. This is also likely due to the order of the if statements in this section of code.
+- Very very rarely the apple can possibly generate within the body of the snake. This is also likely due to the order of the if statements in this section of code but could be fixed if we defined the snake's body inside the apple generating module.
 
-- The LEDS that light up on the FPGA board were just used for testing the score functionality. The correct score is displayed on the FPGA board above these.
+- The LEDS that light up on the FPGA board were just used for testing the score functionality. Not a bug, but we wanted to note that the LEDs and the 7-segment display output the same numbers.
 
 ### <ins>Overview of Code:</ins>
 ```
